@@ -40,9 +40,11 @@ INSTALLED_APPS = [
     'api',
     'situation',
     'rest_framework',
+    'rest_framework_gis',
     'rest_auth', 
     'rest_framework.authtoken',
     'django.contrib.gis',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -139,6 +141,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
+        'django_filters.rest_framework.DjangoFilterBackend',
         'rest_framework.authentication.BasicAuthentication',
     ),
 }
