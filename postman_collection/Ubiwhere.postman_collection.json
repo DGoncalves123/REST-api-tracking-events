@@ -1,0 +1,165 @@
+{
+	"info": {
+		"_postman_id": "7366361d-4e03-4b2e-b6ee-4a24553423c9",
+		"name": "Ubiwhere",
+		"description": "REST API USAGE",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create new account",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"coomer@diogo.com\",\n    \"password\": \"123\",\n    \"extra\": {\n        \"first_name\": \"\",\n        \"last_name\": \"\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:8000/api/users/",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"users",
+						""
+					]
+				},
+				"description": "Adds a user, requires an email and a password. The extra fields are mandatory but can be empty."
+			},
+			"response": []
+		},
+		{
+			"name": "Get login token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"\",\n    \"email\": \"diogo@diogo.com\",\n    \"password\": \"123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:8000/api/auth/login/",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"auth",
+						"login",
+						""
+					]
+				},
+				"description": "Login with created user and get a token"
+			},
+			"response": []
+		},
+		{
+			"name": "Get all users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				},
+				"description": "Get information from all the users registered. (must have session cookie from an admin account login)"
+			},
+			"response": []
+		},
+		{
+			"name": "Get all occurrences, with and without filtering",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "category",
+						"value": "1",
+						"type": "text"
+					},
+					{
+						"key": "creator",
+						"value": "1",
+						"type": "text"
+					},
+					{
+						"key": "dist",
+						"value": "40",
+						"type": "text"
+					},
+					{
+						"key": "point",
+						"value": "-65.32,65.25",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/situation/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"situation",
+						""
+					]
+				},
+				"description": "JSON or HTML list of all the occurrences available, use header 'creator' for filtering by creator ID, use header 'category' to filter by category defined by its 3 integer values, use header 'dist' and 'point' to filter by proximity to point in the world, defined by the distance to the point in meters and the center point is defined by two numbers, comma separated and decimals dot separated."
+			},
+			"response": []
+		},
+		{
+			"name": "Add new occurrence",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"description\": \"description of the occurrence\",\r\n    \"location\": \"-120 32.125\",\r\n    \"status\": 1,\r\n    \"category\": 1\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/situation/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"situation",
+						""
+					]
+				},
+				"description": "create new occurrence"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
