@@ -1,0 +1,76 @@
+from rest_framework import serializers
+from api.models import UserBase, User
+
+
+class UserSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name')
+
+
+class UserBaseSerializer(serializers.HyperlinkedModelSerializer):
+    extra = UserSerializer(required=True)
+
+    class Meta:
+        model = UserBase
+        fields = ('url','email','password','extra')
+        extra_kwargs = {'password': {'write_only': True}}
+
+    def create(self, validated_data):
+        extra_data = validated_data.pop('extra')
+        password = validated_data.pop('password')
+        user = UserBase(**validated_data)
+        user.set_password(password)
+        user.save()
+        User.objects.create(user=user, **extra_data)
+        return user
+
+    def update(self, instance, validated_data):
+        extra_data = validated_data.pop('extra')
+        extra = instance.extra
+
+        instance.email = validated_data.get('email', instance.email)
+        instance.save()
+
+        extra.first_name = extra_data.get('first_name', extra.first_name)
+        extra.last_name = extra_data.get('last_name', extra.last_name)
+        extra.save()
+
+        return instance
+
+
+#class UserSerializer(serializers.HyperlinkedModelSerializer):
+#    profile = UserProfileSerializer(required=True)
+#
+#    class Meta:
+#        model = UserBase
+#        fields = ('url', 'email', 'first_name', 'last_name', 'password', 'extra')
+#        extra_kwargs = {'password': {'write_only': True}}
+#
+#    def create(self, validated_data):
+#        profile_data = validated_data.pop('extra')
+#        password = validated_data.pop('password')
+#        user = UserBase(**validated_data)
+#        user.set_password(password)
+#        user.save()
+#        User.objects.create(user=user, **profile_data)
+#        return user
+#
+#    def update(self, instance, validated_data):
+#        profile_data = validated_data.pop('extra')
+#        profile = instance.profile
+#
+#        instance.email = validated_data.get('email', instance.email)
+#        instance.save()
+#
+#        profile.title = profile_data.get('title', profile.title)
+#        profile.dob = profile_data.get('dob', profile.dob)
+#        profile.address = profile_data.get('address', profile.address)
+#        profile.country = profile_data.get('country', profile.country)
+#        profile.city = profile_data.get('city', profile.city)
+#        profile.zip = profile_data.get('zip', profile.zip)
+#        profile.photo = profile_data.get('photo', profile.photo)
+#        profile.save()
+#
+#        return instance
