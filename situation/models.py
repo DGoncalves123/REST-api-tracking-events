@@ -6,7 +6,7 @@ class Occurrence(models.Model):
 		(1,'CONSTRUCTION'),
 		(2,'SPECIAL_EVENT'),
 		(3,'INCIDENT'),
-		(4,'WHEATHER_CONDITION'),
+		(4,'WEATHER_CONDITION'),
 		(5,'ROAD_CONDITION'),
 	]
 	statuses = [

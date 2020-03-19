@@ -40,28 +40,28 @@ class OccurrenceSerializer(serializers.HyperlinkedModelSerializer):
         """
         Must check location format before you can put it into an object
         """
-        if ('location' in data):
-            split=data['location'].split(' ')
-            if len(split)==2:
-                try:
-                    lat=float(split[0])
-                    lon=float(split[1])
-                except:
-                    raise ValidationError("Wrong format for location, must match: \'latitude longitude\'.")
-            else:
-                raise ValidationError("Wrong format for location, must match: \'latitude longitude\'.")
-            if lat>90 or lat<-90 or lon>180 or lon<-180:
-                raise ValidationError("Wrong format for location, must be a real coordinate.")
-            p=Point(lat,lon)
-            data['location']=p
+        #if ('location' in data):
+        #    split=data['location'].split(' ')
+        #    if len(split)==2:
+        #        try:
+        #            lat=float(split[0])
+        #            lon=float(split[1])
+        #        except:
+        #            raise ValidationError("Wrong format for location, must match: \'latitude longitude\'.")
+        #    else:
+        #        raise ValidationError("Wrong format for location, must match: \'latitude longitude\'.")
+        #    if lat>90 or lat<-90 or lon>180 or lon<-180:
+        #        raise ValidationError("Wrong format for location, must be a real coordinate.")
+        #    p=Point(lat,lon)
+        #    data['location']=p
 
         if ('creator' in data):
             user=data['creator']
             if user.is_anonymous:
                 raise ValidationError("Must be logged in to post occurrences.")
-        print()
-        print(list(data.keys()))
-        print()
+        #print()
+        #print(list(data.keys()))
+        #print()
         if ('status' in data):
             if data['status']>3 or data['status']<1:
                 raise ValidationError("Not a valid status value (1-to be validate, 2-validated, 3-resolved).")
