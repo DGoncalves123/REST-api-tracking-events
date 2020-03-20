@@ -51,6 +51,7 @@ The parameters defined are:
 /api/situation/
 ```
 *<sup>1</sup> For user and situation see the specific object by adding the object id at the end of the endpoint (e.g.: /api/users/1/), which can also be used to edit the object*
+
 E.G. 
 * **POST** To change the object entirely
 * **PATCH** To edit a field, such as status in an occurrence
