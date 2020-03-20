@@ -24,23 +24,6 @@ class OccurrenceSerializer(serializers.HyperlinkedModelSerializer):
         return instance
 
     def validate(self, data):
-        """
-        Must check location format before you can put it into an object, newer version does not need this anymore, but just in case
-        """
-        #if ('location' in data):
-        #    split=data['location'].split(' ')
-        #    if len(split)==2:
-        #        try:
-        #            lat=float(split[0])
-        #            lon=float(split[1])
-        #        except:
-        #            raise ValidationError("Wrong format for location, must match: \'latitude longitude\'.")
-        #    else:
-        #        raise ValidationError("Wrong format for location, must match: \'latitude longitude\'.")
-        #    if lat>90 or lat<-90 or lon>180 or lon<-180:
-        #        raise ValidationError("Wrong format for location, must be a real coordinate.")
-        #    p=Point(lat,lon)
-        #    data['location']=p
 
         if ('creator' in data):
             user=data['creator']
