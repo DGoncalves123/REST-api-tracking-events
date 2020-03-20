@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\": \"coomer@diogo.com\",\n    \"password\": \"123\",\n    \"extra\": {\n        \"first_name\": \"\",\n        \"last_name\": \"\"\n    }\n}",
+					"raw": "{\n    \"email\": \"joao@diogo.com\",\n    \"password\": \"123\",\n    \"extra\": {\n        \"first_name\": \"\",\n        \"last_name\": \"\"\n    }\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -40,13 +40,32 @@
 			"response": []
 		},
 		{
-			"name": "Get login token",
+			"name": "Do login and get cookies",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"username\": \"\",\n    \"email\": \"diogo@diogo.com\",\n    \"password\": \"123\"\n}",
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "d@d.com",
+							"description": "the name of the superuser created, for example",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123",
+							"description": "the password of the superuser",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						}
+					],
 					"options": {
 						"raw": {
 							"language": "json"
@@ -79,7 +98,19 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": ""
+					"raw": "127.0.0.1:8000/api/users/",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"users",
+						""
+					]
 				},
 				"description": "Get information from all the users registered. (must have session cookie from an admin account login)"
 			},
@@ -89,28 +120,7 @@
 			"name": "Get all occurrences, with and without filtering",
 			"request": {
 				"method": "GET",
-				"header": [
-					{
-						"key": "category",
-						"value": "1",
-						"type": "text"
-					},
-					{
-						"key": "creator",
-						"value": "1",
-						"type": "text"
-					},
-					{
-						"key": "dist",
-						"value": "40",
-						"type": "text"
-					},
-					{
-						"key": "point",
-						"value": "-65.32,65.25",
-						"type": "text"
-					}
-				],
+				"header": [],
 				"url": {
 					"raw": "http://127.0.0.1:8000/api/situation/",
 					"protocol": "http",
@@ -125,6 +135,32 @@
 						"api",
 						"situation",
 						""
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "1",
+							"description": "category id (1- construction) (2- special event) (3- incident) (4- weather condition) (5- road condition)",
+							"disabled": true
+						},
+						{
+							"key": "creator",
+							"value": "1",
+							"description": "user id",
+							"disabled": true
+						},
+						{
+							"key": "dist",
+							"value": "40",
+							"description": "maximum distance to the point",
+							"disabled": true
+						},
+						{
+							"key": "point",
+							"value": "-8 -55",
+							"description": "center of the area",
+							"disabled": true
+						}
 					]
 				},
 				"description": "JSON or HTML list of all the occurrences available, use header 'creator' for filtering by creator ID, use header 'category' to filter by category defined by its 3 integer values, use header 'dist' and 'point' to filter by proximity to point in the world, defined by the distance to the point in meters and the center point is defined by two numbers, comma separated and decimals dot separated."
@@ -135,10 +171,39 @@
 			"name": "Add new occurrence",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "X-CSRFToken",
+						"value": "qvvKAC3kPPUDrpvmqPPldiJeU6gjAEyjy6HAcBWGGqEYV7j9dlRuGHtzQTf5dgPV",
+						"description": "the CSRFToken provided by login",
+						"type": "text"
+					}
+				],
 				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"description\": \"description of the occurrence\",\r\n    \"location\": \"-120 32.125\",\r\n    \"status\": 1,\r\n    \"category\": 1\r\n}"
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "description",
+							"value": "Description of the problem",
+							"type": "text"
+						},
+						{
+							"key": "location",
+							"value": "0101000020E6100000AECB9307F9D812400F2ADCE003704940",
+							"description": "POINT in WKT EWKT or HEXEWKB form",
+							"type": "text"
+						},
+						{
+							"key": "status",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "category",
+							"value": "1",
+							"type": "text"
+						}
+					]
 				},
 				"url": {
 					"raw": "http://127.0.0.1:8000/api/situation/",
@@ -156,7 +221,56 @@
 						""
 					]
 				},
-				"description": "create new occurrence"
+				"description": "create new occurrence, must have a login cookie and the csrf header token"
+			},
+			"response": []
+		},
+		{
+			"name": "Edit occurrence",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"description": "the CSRFToken provided by login",
+						"key": "X-CSRFToken",
+						"type": "text",
+						"value": "VbRkHQRRwHyqU8aVZ0NdfQ9a9IzoDuKO1WlY7nHAJCg3v29lZ87gnS6KGmFyYxXf"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "status",
+							"value": "3",
+							"type": "text"
+						},
+						{
+							"key": "",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/situation/1/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"situation",
+						"1",
+						""
+					]
+				},
+				"description": "create new occurrence, must have a login cookie and the csrf header token from a logged in admin account"
 			},
 			"response": []
 		}

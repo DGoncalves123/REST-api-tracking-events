@@ -54,9 +54,11 @@ The parameters defined are:
 
 ## Endpoint's main permissions
 
-* **Everyone** See occurrences, create user account
-* **UserLoggedIn** Create occurrences, edit user account
-* **Admin** Edit occurrences, get all user accounts
+Using the CSFR and session from the login endpoint, you can obtain the 'logged in user' or 'admin' permission depending on the type of account logged in.
+
+* **Everyone**: See occurrences, create user account
+* **UserLoggedIn**: Create occurrences, edit user account
+* **Admin**: Edit occurrences, get all user accounts
 
 ## Tests with Postman
 

@@ -5,7 +5,7 @@ from rest_framework.permissions import AllowAny,IsAuthenticated
 
 from situation.models import Occurrence
 from situation.serializers import OccurrenceSerializer
-from api.permissions import IsLoggedInUserOrAdmin, IsAdminUser
+from situation.permissions import IsLoggedInUserOrAdmin, IsAdminUser
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework_gis.filters import DistanceToPointFilter
 
