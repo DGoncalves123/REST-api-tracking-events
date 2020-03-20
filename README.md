@@ -39,7 +39,7 @@ The parameters defined are:
 * **POST** Create user account 
 * **GET** See all users
 ```
-/api/users/
+/api/users/ <sup>1</sup>
 ```
 * **POST** Login
 ```
@@ -48,9 +48,9 @@ The parameters defined are:
 * **POST** Add new occurrence
 * **GET** See all occurrences, different header variables can be useed to filter
 ```
-/api/situation/
+/api/situation/ <sup>1</sup>
 ```
-*For user and situation see the specific object by adding the object id at the end of the endpoint (e.g.: /api/users/1/), which can also be used to edit the object*
+*<sup>1</sup> For user and situation see the specific object by adding the object id at the end of the endpoint (e.g.: /api/users/1/), which can also be used to edit the object*
 
 ## Endpoint's main permissions
 
