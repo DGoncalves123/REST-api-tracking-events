@@ -1,3 +1,8 @@
+
+![alt text](https://static.djangoproject.com/img/logos/django-logo-positive.svg "Logo Title Text 1")
+![alt text](https://wiki.postgresql.org/images/thumb/a/a4/PostgreSQL_logo.3colors.svg/116px-PostgreSQL_logo.3colors.svg.png "Logo Title Text 1")
+
+
 # REST API to track spatial occurrences
 
 A REST API to allows the creation and edition of users, after which it allows for the creation of occurrences of several types.
@@ -32,6 +37,18 @@ The parameters defined are:
 * admin@admin.com - postgres : as user and password for the db admin
 * admin - diogo : as user and password for the database
 
+## API structure
+* /
+  * admin/
+  * api/
+     * users/
+          * 'user_id'/
+      * situation/
+          * 'situation_id'/
+      * auth/
+          * login/
+          * logout/
+     
 
 ## Main endpoints
 *Every endpoint can read json,x-www-urlencoded and form data and can return json or html*
@@ -90,5 +107,4 @@ Using the CSFR and session from the login endpoint, you can obtain the 'logged i
 ## Authors
 
 * **Diogo Goncalves** - *Whole project* - [Personal github](https://github.com/DGoncalves123)
-
 
