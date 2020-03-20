@@ -37,18 +37,18 @@ The parameters defined are:
 *Every endpoint can read json,x-www-urlencoded and form data and can return json or html*
 
 * **POST** Create user account 
-* **GET** See all users
+* **GET** See all users <sup>1</sup>
 ```
-/api/users/ <sup>1</sup>
+/api/users/
 ```
 * **POST** Login
 ```
 /api/auth/login/
 ```
 * **POST** Add new occurrence
-* **GET** See all occurrences, different header variables can be useed to filter
+* **GET** See all occurrences, different header variables can be useed to filter <sup>1</sup>
 ```
-/api/situation/ <sup>1</sup>
+/api/situation/
 ```
 *<sup>1</sup> For user and situation see the specific object by adding the object id at the end of the endpoint (e.g.: /api/users/1/), which can also be used to edit the object*
 
