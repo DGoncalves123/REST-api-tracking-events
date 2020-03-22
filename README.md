@@ -27,7 +27,9 @@ The container setup generates three images connected by a bridge network:
 * The last one has the database administrator server, which is connected to the database.
 
 *The default passwords and usernames are placed in the compose file, for now*
+
 *The django server waits for the database a predetermined amount of time, which could lead to synchronization problems*
+
 *The three images run on the same container for network simplicity*
 
 
