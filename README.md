@@ -19,6 +19,17 @@ Get a copy of the files and place them in the current disposition on the desired
 
 Install [Docker](https://www.docker.com/products/docker-desktop) and docker compose, if on windows or mac, the installer from the link already includes docker compose.
 
+## Container explanation
+
+The container setup generates three images connected by a bridge network:
+* One containes python, runs the django server and connects to the database image.
+* Another uses a PostGIS image which runs the database controller and has a volume for the data saved.
+* The last one has the database administrator server, which is connected to the database.
+
+* The default passwords and usernames are placed in the compose file, for now *
+* The django server waits for the database a predetermined amount of time, which could lead to synchronization problems *
+* The three images run on the same container for network simplicity *
+
 
 ### Installing
 
