@@ -19,7 +19,18 @@ Get a copy of the files and place them in the current disposition on the desired
 
 Install [Docker](https://www.docker.com/products/docker-desktop) and docker compose, if on windows or mac, the installer from the link already includes docker compose.
 
-## Container explanation
+
+
+
+## Installation
+
+For windows: 
+* Start a command line at the root of the project.
+* Do 'docker-compose build', which will create an image of all the components.
+* Do 'docker-compose up', to send the images to a container and starting it. **The django server is set to debug mode.**
+* Open a command line to the container which has the django application running and create a superuser, using 'python manage.py createsuperuser' and following the steps that appear.
+
+### Container explanation
 
 The container setup generates three images connected by a bridge network:
 * One containes python, runs the django server and connects to the database image.
@@ -32,18 +43,7 @@ The container setup generates three images connected by a bridge network:
 
 *The three images run on the same container for network simplicity*
 
-
-### Installing
-
-For windows: 
-* Start a command line at the root of the project.
-* Do 'docker-compose build', which will create an image of all the components.
-* Do 'docker-compose up', to send the images to a container and starting it. **The django server is set to debug mode.**
-* Open a command line to the container which has the django application running and create a superuser, using 'python manage.py createsuperuser' and following the steps that appear.
-
-
-
-## Results of the installation
+### Results of the installation
 
 The database admin should be running on the local machine at port :5454, the database should be running at port :5432 and the REST server should be running at :8000.
 The parameters defined are:
